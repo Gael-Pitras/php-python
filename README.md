@@ -15,18 +15,47 @@ Cette page vise à fournir des informations complètes sur les différentes mét
 
 ### Mécanisme de base
 
-PHP et Python peuvent communiquer entre eux en utilisant une API REST. Dans ce modèle, un script agit comme un client qui fait des requêtes HTTP à un serveur, qui répond ensuite avec les données demandées.
+PHP et Python peuvent communiquer entre eux en utilisant une API REST. Dans ce modèle, un des scripts agit comme un client qui fait des requêtes HTTP à un serveur, qui répond ensuite avec les données demandées.
 
-### Librairies et fonctions utilisées
+### De PHP vers Python
+
+#### Librairies et fonctions utilisées
+
+- En PHP : Utilisation de la bibliothèque `curl` pour effectuer des requêtes HTTP.
+- En Python : Utilisation du framework `Flask` pour créer un service web.
+
+#### Exemple de code
+
+```php
+// PHP
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "http://your_python_server/api");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$response = curl_exec($ch);
+curl_close($ch);
+```
+
+```python
+# Python
+from flask import Flask, jsonify
+app = Flask(__name__)
+
+@app.route('/api', methods=['GET'])
+def api():
+    return jsonify({"key": "value"})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+```
+
+### De Python vers PHP
+
+#### Librairies et fonctions utilisées
 
 - En PHP : Utilisation de la fonction native `header()` pour définir le type de contenu et de `json_encode()` pour convertir les données en format JSON.
 - En Python : Utilisation de la bibliothèque `requests` pour effectuer des requêtes HTTP et traiter les réponses.
 
-### Sécurité
-
-Utilisez HTTPS pour sécuriser la communication entre le client et le serveur. Assurez-vous également d'authentifier et d'autoriser les requêtes pour protéger les données sensibles.
-
-### Exemple de code
+#### Exemple de code
 
 ```php
 // PHP
@@ -38,7 +67,7 @@ echo json_encode($data);
 ```
 
 ```python
-// Python
+# Python
 import requests
 response = requests.get('http://your_php_server/api.php')
 data = response.json()
