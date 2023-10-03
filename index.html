@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Communication entre PHP et Python</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        body {
+            font-family: 'Montserrat';font-size: 22px;
+        }
+        section {
+            border: 1px solid #ccc;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1{
+            padding:20px;
+            margin:0px;
+        }
+        h2 {
+            color: #333;
+            font-size:24px;
+        }
+
+        h3 {
+            color: #444;
+            font-size:20px;
+        }
+
+        p, ul {
+            margin-bottom: 20px;
+            font-size:16px;
+        }
+
+        pre {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size:16px;
+            margin: 0px;
+        }
+
+        code {
+            color: #d63384;
+            background-color: #f9f9f9;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 40px;
+        }
+        .pre-content{
+            position: relative;
+        }
+        .pre-content button{
+            position: absolute;
+            right:15px;
+            top:15px;
+            background:#fff;
+            color:#666;
+            border:0px solid #000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height:30px;
+            width:30px;
+            font-size:20px;
+            padding:0px;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            cursor:pointer;
+        }
+
+        .pre-content button:hover{
+            background:#fff;
+            color:#000;
+
+        }
+        .security{
+            background-color: rgba(255, 0, 0, 0.2);
+            padding:20px;
+        }
+        .best-security{
+            background-color: rgba(0, 255, 0, 0.2);
+            padding:20px;
+        }
+        .best-security span{
+            font-weight: bold;
+        }
+        .info{
+            background-color: rgba(0, 157, 255, 0.2);
+            padding:20px;
+        }
+        .intro{
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding:20px;
+            margin: 0px 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .summary{
+            border: 1px solid #ccc;
+            margin: 20px;
+            margin-bottom: 0px;
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .summary ul{
+            margin:0px;
+            padding:0px;
+            list-style: none;
+        }
+        .summary ul li{
+            padding:5px;
+        }
+        .summary a{
+            text-decoration: none;
+            color:#000;
+            border-bottom:1px solid #000;
+        }
+        .summary a:hover{
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.copy-button').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var preId = button.getAttribute('data-pre-id');
+                    var preElement = document.getElementById(preId);
+                    var textToCopy = preElement.textContent;
+
+                    navigator.clipboard.writeText(textToCopy).then(function() {
+                        alert('Texte copié dans le presse-papiers');
+                    }).catch(function(err) {
+                        alert('Erreur lors de la copie :', err);
+                    });
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <h1>Communication entre PHP et Python</h1>
+    <p class="intro">
+        Cette page vise à fournir des informations complètes sur les différentes méthodes permettant d'établir une communication entre PHP et Python. Vous y trouverez des exemples de code, des conseils de sécurité et des meilleures pratiques pour chaque méthode. Que vous soyez un développeur débutant ou expérimenté, cette ressource est conçue pour vous aider à choisir la meilleure méthode pour votre projet.
+    </p>
+    <div class="summary">
+        <ul>
+            <li><a href="#utilisation_API_REST">1. Utilisation d'une API REST</a></li>
+            <li><a href="#utilisation_BDD">2. Utilisation d'une base de données</a></li>
+            <li><a href="#utilisation_FILE">3. Communication via un fichier</a></li>
+            <li><a href="#utilisation_EXEC">4. Utilisation de exec ou shell_exec en PHP</a></li>
+        </ul>
+       
+    </div>
+
+    <section>
+    <h2 id="utilisation_API_REST">1. Utilisation d'une API REST</h2>
+    <p class="best-security"><span>TOP 1</span> Si correctement mis en place avec HTTPS, authentification et autorisation, c'est généralement le moyen le plus sûr d'échanger des données.</p>
+    <h3>Mécanisme de base</h3>
+    <p>PHP et Python peuvent communiquer entre eux en utilisant une API REST. Dans ce modèle, un script agit comme un client qui fait des requêtes HTTP à un serveur, qui répond ensuite avec les données demandées.</p>
+    
+    <h3>Librairies et fonctions utilisées</h3>
+    <ul>
+        <li>En PHP : Utilisation de la fonction native <code>header()</code> pour définir le type de contenu et de <code>json_encode()</code> pour convertir les données en format JSON.</li>
+        <li>En Python : Utilisation de la bibliothèque <code>requests</code> pour effectuer des requêtes HTTP et traiter les réponses.</li>
+    </ul>
+
+    <h3>Sécurité</h3>
+    <p>Utilisez HTTPS pour sécuriser la communication entre le client et le serveur. Assurez-vous également d'authentifier et d'autoriser les requêtes pour protéger les données sensibles.</p>
+
+    <h3>Exemple de code</h3>
+    <div class="pre-content">
+        <pre id="pre4">
+// PHP
+&lt;?php
+header('Content-Type: application/json');
+$data = ['key' => 'value'];
+echo json_encode($data);
+?&gt;
+
+// Python
+import requests
+response = requests.get('http://your_php_server/api.php')
+data = response.json()
+        </pre>
+        <button title="Copy" class="copy-button" data-pre-id="pre4"><span class="material-symbols-outlined">content_copy</span></button>
+    </div>
+    <p class="info">Les API REST sont fréquemment utilisées en entreprise, en particulier pour les microservices ou les intégrations entre différents systèmes.</p>
+    <p class="security">L'utilisation d'APIs REST pour la communication entre différents systèmes est courante, mais elle doit être correctement sécurisée. L'absence de mesures de sécurité telles que l'authentification, l'autorisation et le chiffrement peut exposer votre système à divers types d'attaques, notamment l'usurpation d'identité, la fuite de données et le piratage de sessions.</p>
+</section>
+
+<section>
+    <h2 id="utilisation_BDD">2. Utilisation d'une base de données</h2>
+    <p class="best-security"><span>TOP 2</span> L'utilisation de requêtes préparées et d'autres mesures de sécurité peut rendre cette méthode relativement sûre.</p>
+    <h3>Mécanisme de base</h3>
+    <p>Les deux scripts PHP et Python peuvent communiquer en lisant et écrivant dans une base de données commune. Ce mode de communication est utile pour les applications plus complexes qui nécessitent un échange de données en temps réel ou asynchrone.</p>
+    
+    <h3>Librairies et fonctions utilisées</h3>
+    <ul>
+        <li><code>pymysql</code> en Python : Une bibliothèque Python pour se connecter à une base de données MySQL.</li>
+    </ul>
+
+    <h3>Sécurité</h3>
+    <p>Il est crucial de sécuriser la base de données et d'utiliser des méthodes comme les requêtes préparées pour prévenir les injections SQL. Assurez-vous également que seuls les utilisateurs autorisés peuvent accéder à la base de données.</p>
+
+    <h3>Exemple de code</h3>
+    <div class="pre-content">
+    <pre id="pre3">
+// PHP avec PDO
+&lt;?php
+$dsn = "mysql:host=localhost;dbname=database";
+$user = "user";
+$password = "password";
+try {
+    $pdo = new PDO($dsn, $user, $password);
+    $sql = "INSERT INTO table (column) VALUES (:data)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':data', $data);
+    $data = 'value';
+    $stmt->execute();
+} catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+}
+?&gt;
+
+// Python
+import pymysql
+connection = pymysql.connect(host='localhost',
+                             user='user',
+                             password='password',
+                             database='database')
+cursor = connection.cursor()
+cursor.execute("SELECT * FROM table")
+data = cursor.fetchall()
+        </pre>
+        <button title="Copy" class="copy-button" data-pre-id="pre3"><span class="material-symbols-outlined">content_copy</span></button>
+    </div>
+    <p class="info">Les bases de données sont très couramment utilisées en entreprise pour stocker et échanger des données. Les bases de données relationnelles comme MySQL sont souvent utilisées avec des langages de programmation tels que PHP et Python.</p>
+    <p class="security">Les bases de données sont souvent la cible d'attaques comme les injections SQL. Bien que l'utilisation de PDO en PHP puisse offrir une certaine protection, il est crucial de suivre les meilleures pratiques pour sécuriser votre base de données. Ne jamais faire confiance aux données fournies par les utilisateurs et toujours utiliser des requêtes préparées pour prévenir les injections SQL.</p>
+</section>
+
+
+<section>
+    <h2 id="utilisation_FILE">3. Communication via un fichier</h2>
+    <p class="best-security"><span>TOP 3</span> Cette méthode peut être sécurisée en contrôlant étroitement l'accès au fichier et en validant toutes les données, mais elle est généralement considérée comme moins sûre que les deux premières méthodes.</p>
+    <h3>Mécanisme de base</h3>
+    <p>Le script PHP et le script Python peuvent lire et écrire dans un fichier commun pour échanger des données. Cette méthode est utile lorsque les deux langages ne s'exécutent pas simultanément.</p>
+    
+    <h3>Fonctions utilisées</h3>
+    <ul>
+        <li><code>file_put_contents()</code> en PHP : Écrit des données dans un fichier.</li>
+        <li><code>open()</code> et <code>read()</code> en Python : Ouvre un fichier et lit son contenu.</li>
+    </ul>
+
+    <h3>Sécurité</h3>
+    <p>Assurez-vous que le fichier est stocké dans un endroit sécurisé et que les données sont validées et nettoyées avant toute opération de lecture ou d'écriture.</p>
+
+    <h3>Exemple de code</h3>
+    <div class="pre-content">
+        <pre id="pre2">
+// PHP
+&lt;?php
+file_put_contents('data.txt', 'Hello from PHP');
+?&gt;
+
+// Python
+with open('data.txt', 'r') as file:
+    data = file.read()
+    print(data)
+        </pre>
+        <button title="Copy" class="copy-button" data-pre-id="pre2"><span class="material-symbols-outlined">content_copy</span></button>
+    </div>
+    <p class="info">Moins courant en entreprise pour des opérations en temps réel, mais peut être utilisé pour des tâches de batch ou des intégrations simples.</p>
+    <p class="security">Bien que simple, cette méthode de communication peut poser des risques si le fichier est stocké dans un emplacement accessible publiquement ou si les données ne sont pas correctement validées. Un mauvais contrôle des accès au fichier ou une mauvaise gestion des données peuvent entraîner des fuites d'informations ou d'autres types d'exploits.</p>
+</section>
+
+
+    <section>
+    <h2 id="utilisation_EXEC">4. Utilisation de exec ou shell_exec en PHP</h2>
+    <p class="best-security"><span>TOP 4</span> Cette méthode est généralement considérée comme la moins sûre en raison des risques élevés d'exécution de code arbitraire.</p>
+    <p>Vous pouvez utiliser les fonctions <code>exec</code> ou <code>shell_exec</code> en PHP pour exécuter un script Python et récupérer sa sortie.</p>
+    
+    <h3>Fonctions exec et shell_exec</h3>
+    <p>Les fonctions <code>exec</code> et <code>shell_exec</code> en PHP sont utilisées pour exécuter des commandes via le shell du système d'exploitation.</p>
+
+    <h4>Différences</h4>
+    <ul>
+        <li><code>exec</code> : Retourne la dernière ligne de la sortie dans une chaîne.</li>
+        <li><code>shell_exec</code> : Retourne toute la sortie en tant que chaîne.</li>
+    </ul>
+
+    <h3>Sécurité</h3>
+    <p>Il est important de noter que l'utilisation de ces fonctions peut présenter des risques de sécurité, surtout si vous passez des données non filtrées.</p>
+
+    <h3>Exemple de code</h3>
+    <div class="pre-content">
+    <pre id="pre1">
+&lt;?php
+$output = shell_exec('python3 votre_script.py argument1 argument2');
+echo $output;
+?&gt;
+    </pre>
+    <button title="Copy" class="copy-button" data-pre-id="pre1"><span class="material-symbols-outlined">content_copy</span></button>
+    </div>
+    <p class="info">Rarement utilisé en entreprise en raison des risques de sécurité élevés associés à l'exécution de commandes shell à partir d'une application web.</p>
+    <p class="security">L'utilisation de exec ou shell_exec en PHP peut être très risquée si elle n'est pas correctement sécurisée. Exécuter des commandes shell à partir de votre application web ouvre la porte à diverses vulnérabilités, y compris l'exécution de code arbitraire. Assurez-vous de bien comprendre les risques associés à ces fonctions et de prendre toutes les mesures de sécurité nécessaires.</p>
+</section>
+
+</body>
+</html>
